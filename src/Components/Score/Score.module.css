@@ -1,0 +1,11 @@
+.header__score {
+    background-color: white;
+    color: #2a46c0;
+    border-radius: 5px;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+}

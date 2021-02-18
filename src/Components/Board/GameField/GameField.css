@@ -1,0 +1,28 @@
+.rock {
+    transform: translateX(-55px) translateY(-320px);
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+}
+
+.paper {
+    transform: translateX(260px) translateY(-320px);
+    z-index: 99;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+}
+
+.scissors {
+    transform: translateX(100px) translateY(-60px);
+    z-index: 99;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: absolute;
+}
