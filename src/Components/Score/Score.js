@@ -3,7 +3,7 @@ import styles from './Score.module.css'
 
 export function Score(props) {
     return (
-        <div className={styles.header__score}>
+        <div className={styles.score}>
             <span>Score</span>
             <span>{props.score}</span>
         </div>

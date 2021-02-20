@@ -3,15 +3,17 @@ import {GameField} from "./GameField/GameField";
 import styles from './Board.module.css'
 import {Route} from "react-router";
 import {Gameplay} from "./Gameplay/Gameplay";
-import {useDispatch} from "react-redux";
 import {Score} from "../Score/Score";
+import {ScoreHistory} from "./ScoreHistory/ScoreHistory";
 
 export const Board = () => {
     const [playerItem, setPlayerItem] = useState('')
     const [autoPickedItem, setAutoPickedItem] = useState('')
     const [score, setScore] = useState(0)
+    let localScore = localStorage.getItem('score')
     const [scoreText, setScoreText] = useState('')
-    const dispatch = useDispatch()
+    const [isLoading, setIsLoading] = useState(true)
+    const [step, setStep] = useState(0)
     const random = Math.floor(Math.random() * 3) + 1
     const autoItem = random === 1 ? 'rock' :
         random === 2 ? 'paper' :
@@ -42,28 +44,40 @@ export const Board = () => {
             gameScoreText = 'draw'
         }
         setScore(score + gameScore)
+        localStorage.setItem('score', String(+localScore + +gameScore))
         setScoreText(gameScoreText)
     }
     useEffect(()=> {
         checkResult()
     }, [autoPickedItem, playerItem])
-    const itemSelected = async (i) => {
+    const itemSelected = (i) => {
         setPlayerItem(i)
-        await setTimeout(() => {
+        setTimeout(() => {
             setAutoPickedItem(autoItem)
         }, 1000)
+        setTimeout(()=> {
+            setIsLoading(false)
+            setStep(step + 1)
+        },1000)
     }
-    const resetAutoItem = () => {
+    const resetLap = () => {
         setAutoPickedItem('')
         setScoreText('')
+        setIsLoading(true)
+    }
+    const onScoreReset = () => {
+        localStorage.clear()
     }
     return (
         <div className={styles.board}>
-            <Score score={score}/>
+            <Score score={localScore}/>
+            <ScoreHistory scoreText={scoreText} score={localScore} step={step}/>
+            <a href='/' onClick={onScoreReset}>New game</a>
             <Route exact path="/" render={() => <GameField itemSelected={itemSelected}/>}/>
             <Route path="/play" render={() => <Gameplay playerItem={playerItem}
                                                         autoPickedItem={autoPickedItem}
-                                                        resetAutoItem={resetAutoItem}
+                                                        resetLap={resetLap}
+                                                        isLoading={isLoading}
                                                         scoreText={scoreText}/>}/>
         </div>
     )

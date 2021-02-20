@@ -1,4 +1,4 @@
-.header__score {
+.score {
     background-color: white;
     color: #2a46c0;
     border-radius: 5px;
@@ -8,4 +8,6 @@
     justify-content: center;
     width: 100px;
     height: 100px;
+    position: absolute;
+    right: 100px;
 }
