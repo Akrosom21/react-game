@@ -1,12 +1,24 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {NavLink} from "react-router-dom";
 import styles from './Gameplay.module.css'
 import loading from '../../../img/loading.svg'
 
 export const Gameplay = (props) => {
     const onReset = () => {
-        props.resetLap()
+            props.resetLap()
     }
+    const onRestart = (e) => {
+        if (e.key === 'Enter') {
+            props.toGameField()
+            props.resetLap()
+        }
+    }
+    useEffect(()=> {
+        document.addEventListener('keydown', onRestart)
+        return () => {
+            document.removeEventListener('keydown', onRestart)
+        }
+    },[])
     return (
         <div>
             <div className="result">{props.scoreText}</div>

@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {GameField} from "./GameField/GameField";
 import styles from './Board.module.css'
-import {Route} from "react-router";
+import {Route, useHistory, useLocation} from "react-router";
 import {Gameplay} from "./Gameplay/Gameplay";
 import {Score} from "../Score/Score";
 import {ScoreHistory} from "./ScoreHistory/ScoreHistory";
 
-export const Board = () => {
+export const Board = (props) => {
     const [playerItem, setPlayerItem] = useState('')
     const [autoPickedItem, setAutoPickedItem] = useState('')
     const [score, setScore] = useState(0)
@@ -14,10 +14,6 @@ export const Board = () => {
     const [scoreText, setScoreText] = useState('')
     const [isLoading, setIsLoading] = useState(true)
     const [step, setStep] = useState(0)
-    const random = Math.floor(Math.random() * 3) + 1
-    const autoItem = random === 1 ? 'rock' :
-        random === 2 ? 'paper' :
-            random === 3 ? 'scissors' : ''
     const checkResult = () => {
         let gameScore = 0
         let gameScoreText = ''
@@ -50,35 +46,72 @@ export const Board = () => {
     useEffect(()=> {
         checkResult()
     }, [autoPickedItem, playerItem])
+    useEffect(()=> {
+        document.addEventListener('keydown', onScoreRestart)
+        document.addEventListener('keydown', onItemPressed)
+        return ()=> {
+            document.removeEventListener('keydown', onScoreRestart)
+            document.removeEventListener('keydown', onItemPressed)
+        }
+    }, [])
     const itemSelected = (i) => {
+        let random = Math.floor(Math.random() * 3) + 1
+        let autoItem = random === 1 ? 'rock' :
+            random === 2 ? 'paper' :
+                random === 3 ? 'scissors' : ''
         setPlayerItem(i)
         setTimeout(() => {
             setAutoPickedItem(autoItem)
         }, 1000)
         setTimeout(()=> {
             setIsLoading(false)
-            setStep(step + 1)
+            setStep(step + Math.floor(Math.random() * 100) + 1)
         },1000)
+    }
+    const onItemPressed = (e) => {
+        if (e.key === 'ArrowLeft') {
+            path.push('/play')
+            itemSelected('rock')
+        } else if (e.key === 'ArrowRight') {
+            path.push('/play')
+            itemSelected('paper')
+        } else if (e.key === 'ArrowDown') {
+            path.push('/play')
+            itemSelected('scissors')
+        }
     }
     const resetLap = () => {
         setAutoPickedItem('')
         setScoreText('')
         setIsLoading(true)
     }
+    const onScoreRestart = (e) => {
+        if (e.key === 'Shift') {
+            localStorage.clear()
+            path.push('/')
+            window.location.reload()
+        }
+    }
     const onScoreReset = () => {
-        localStorage.clear()
+            localStorage.removeItem('score')
+            localStorage.removeItem('history')
+    }
+    let path = useHistory()
+    const toGameField = () => {
+        path.push('/')
     }
     return (
         <div className={styles.board}>
-            <Score score={localScore}/>
-            <ScoreHistory scoreText={scoreText} score={localScore} step={step}/>
-            <a href='/' onClick={onScoreReset}>New game</a>
-            <Route exact path="/" render={() => <GameField itemSelected={itemSelected}/>}/>
+            <Score theme={props.theme} score={localScore}/>
+            <ScoreHistory scoreText={scoreText} score={localScore} step={step} theme={props.theme}/>
+            <a href='/' style={props.theme.tableText} onClick={onScoreReset}>New game</a>
+            <Route exact path='/' render={() => <GameField itemSelected={itemSelected}/>}/>
             <Route path="/play" render={() => <Gameplay playerItem={playerItem}
                                                         autoPickedItem={autoPickedItem}
                                                         resetLap={resetLap}
                                                         isLoading={isLoading}
-                                                        scoreText={scoreText}/>}/>
+                                                        scoreText={scoreText}
+                                                        toGameField={toGameField}/>}/>
         </div>
     )
 }

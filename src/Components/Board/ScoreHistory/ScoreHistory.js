@@ -8,8 +8,9 @@ export const ScoreHistory = (props) => {
      let localHistory = JSON.parse(localStorage.getItem('history'))
 
     useEffect(()=> {
+        let localStep = localHistory[localHistory.length - 1].step + 1
         let newHistory = {
-            step: localHistory.length + 1,
+            step: localStep,
             result: props.scoreText,
             score: props.score
         }
@@ -23,7 +24,7 @@ export const ScoreHistory = (props) => {
         }
     },[props.step])
     return (
-        <div>
+        <div style={props.theme.tableText}>
             <div className="history__title"><span>Step</span><span>Result</span><span>Score</span></div>
             <div className="history__text">
                 {localHistory.map((h, i) => <div key={i}><span>{h.step}</span><span>{h.result}</span><span>{h.score}</span></div>)}
