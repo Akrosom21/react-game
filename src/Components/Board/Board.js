@@ -35,6 +35,24 @@ export const Board = (props) => {
         } else if (playerItem === 'scissors' && autoPickedItem === 'paper') {
             gameScore = 1
             gameScoreText = 'you win'
+        } else if (playerItem === 'spock' && autoPickedItem === 'paper') {
+            gameScore = -1
+            gameScoreText = 'you lose'
+        } else if (playerItem === 'spock' && autoPickedItem === 'rock') {
+            gameScore = 1
+            gameScoreText = 'you win'
+        } else if (playerItem === 'spock' && autoPickedItem === 'scissors') {
+            gameScore = 1
+            gameScoreText = 'you win'
+        } else if (playerItem === 'rock' && autoPickedItem === 'spock') {
+            gameScore = -1
+            gameScoreText = 'you lose'
+        } else if (playerItem === 'scissors' && autoPickedItem === 'spock') {
+            gameScore = -1
+            gameScoreText = 'you lose'
+        } else if (playerItem === 'paper' && autoPickedItem === 'spock') {
+            gameScore = 1
+            gameScoreText = 'you win'
         } else if (playerItem === autoPickedItem) {
             gameScore = 0
             gameScoreText = 'draw'
@@ -43,30 +61,34 @@ export const Board = (props) => {
         localStorage.setItem('score', String(+localScore + +gameScore))
         setScoreText(gameScoreText)
     }
-    useEffect(()=> {
+    useEffect(() => {
         checkResult()
     }, [autoPickedItem, playerItem])
-    useEffect(()=> {
+    useEffect(() => {
         document.addEventListener('keydown', onScoreRestart)
         document.addEventListener('keydown', onItemPressed)
-        return ()=> {
+        return () => {
             document.removeEventListener('keydown', onScoreRestart)
             document.removeEventListener('keydown', onItemPressed)
         }
     }, [])
-    const itemSelected = (i) => {
+    const itemSelected = (i, length) => {
         let random = Math.floor(Math.random() * 3) + 1
+        if (length === 4) {
+            random = Math.floor(Math.random() * 4) + 1
+        }
         let autoItem = random === 1 ? 'rock' :
             random === 2 ? 'paper' :
-                random === 3 ? 'scissors' : ''
+                random === 3 ? 'scissors' :
+                    random === 4 ? 'spock' : ''
         setPlayerItem(i)
         setTimeout(() => {
             setAutoPickedItem(autoItem)
         }, 1000)
-        setTimeout(()=> {
+        setTimeout(() => {
             setIsLoading(false)
             setStep(step + Math.floor(Math.random() * 100) + 1)
-        },1000)
+        }, 1000)
     }
     const onItemPressed = (e) => {
         if (e.key === 'ArrowLeft') {
@@ -93,8 +115,8 @@ export const Board = (props) => {
         }
     }
     const onScoreReset = () => {
-            localStorage.removeItem('score')
-            localStorage.removeItem('history')
+        localStorage.removeItem('score')
+        localStorage.removeItem('history')
     }
     let path = useHistory()
     const toGameField = () => {
