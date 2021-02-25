@@ -34,6 +34,9 @@ export const Header = (props) => {
             props.setLight()
         }
     }
+    const onFullscreen = () => {
+        document.documentElement.webkitRequestFullscreen()
+    }
     return (
         <div className={styles.header}>
             <div style={props.theme.headerText} className={styles.header__name}>
@@ -44,6 +47,7 @@ export const Header = (props) => {
             {isMusic && <Music musicClose={musicClose} soundsSwitch={props.soundsSwitch}/>}
             <div className="header__rulers" onClick={onRulers}>Rulers</div>
             {isRulers && <Rules rulersClose={rulersClose} />}
+            <div onClick={onFullscreen}>Fullscreen</div>
         </div>
     )
 }
