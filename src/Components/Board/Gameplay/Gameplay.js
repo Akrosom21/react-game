@@ -2,10 +2,14 @@ import React, {useEffect} from 'react'
 import {NavLink} from "react-router-dom";
 import styles from './Gameplay.module.css'
 import loading from '../../../img/loading.svg'
+import useSound from 'use-sound';
+import restart from '../../../music/restart.ogg'
 
 export const Gameplay = (props) => {
+    const [play] = useSound(restart, {soundEnabled: props.soundEnabled})
     const onReset = () => {
-            props.resetLap()
+        play()
+        props.resetLap()
     }
     const onRestart = (e) => {
         if (e.key === 'Enter') {
@@ -13,12 +17,12 @@ export const Gameplay = (props) => {
             props.resetLap()
         }
     }
-    useEffect(()=> {
+    useEffect(() => {
         document.addEventListener('keydown', onRestart)
         return () => {
             document.removeEventListener('keydown', onRestart)
         }
-    },[])
+    }, [])
     return (
         <div>
             <div className="result">{props.scoreText}</div>

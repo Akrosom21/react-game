@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import {GameField} from "./GameField/GameField";
 import styles from './Board.module.css'
-import {Route, useHistory, useLocation} from "react-router";
+import {Route, useHistory} from "react-router";
 import {Gameplay} from "./Gameplay/Gameplay";
 import {Score} from "../Score/Score";
 import {ScoreHistory} from "./ScoreHistory/ScoreHistory";
+import end from '../../music/end.mp3'
+import useSound from "use-sound";
 
 export const Board = (props) => {
     const [playerItem, setPlayerItem] = useState('')
@@ -15,6 +17,7 @@ export const Board = (props) => {
     const [isLoading, setIsLoading] = useState(true)
     const [step, setStep] = useState(0)
     const [speed, setSpeed] = useState(0)
+    const [play] = useSound(end, {soundEnabled: props.soundEnabled})
     if (!localStorage.getItem('speed')) {
         localStorage.setItem('speed', String(3000))
         setSpeed(3000)
@@ -93,6 +96,7 @@ export const Board = (props) => {
             random === 2 ? 'paper' :
                 random === 3 ? 'scissors' :
                     random === 4 ? 'spock' : ''
+        props.play()
         setPlayerItem(i)
         setTimeout(() => {
             setAutoPickedItem(autoItem)
@@ -100,6 +104,7 @@ export const Board = (props) => {
         setTimeout(() => {
             setIsLoading(false)
             setStep(step + Math.floor(Math.random() * 100) + 1)
+            play()
         }, +localSpeed)
     }
     const onItemPressed = (e) => {
@@ -112,6 +117,9 @@ export const Board = (props) => {
         } else if (e.key === 'ArrowDown') {
             path.push('/play')
             itemSelected('scissors')
+        } else if (e.key === 'ArrowUp') {
+            path.push('/play')
+            itemSelected('spock')
         }
     }
     const resetLap = () => {
@@ -156,7 +164,8 @@ export const Board = (props) => {
                                                             resetLap={resetLap}
                                                             isLoading={isLoading}
                                                             scoreText={scoreText}
-                                                            toGameField={toGameField}/>}/>
+                                                            toGameField={toGameField}
+                                                            soundEnabled={props.soundEnabled}/>}/>
             </div>
                 <button onClick={onFastMode}>Switch {speedText} Mode</button>
         </>

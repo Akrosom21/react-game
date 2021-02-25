@@ -3,8 +3,12 @@ import './App.css';
 import {Header} from "./Components/Header/Header";
 import {Footer} from "./Components/Footer/Footer";
 import {Board} from "./Components/Board/Board";
+import useSound from "use-sound";
+import soundSelect from "./music/start.mp3";
 
 function App() {
+    const [soundEnabled, setSoundEnabled] = useState(true)
+    const [play] = useSound(soundSelect, {soundEnabled})
     const lightTheme = {
         background: {background: 'radial-gradient(circle, #717f91 0%, #515282 100%)'},
         headerText: {color: '#000'},
@@ -36,11 +40,13 @@ function App() {
         setTheme(lightTheme)
         localStorage.setItem('theme', JSON.stringify(lightTheme))
     }
-
+    const soundsSwitch = () => {
+        soundEnabled ? setSoundEnabled(false) : setSoundEnabled(true)
+    }
   return (
     <div className="App" style={lightTheme.background}>
-      <Header theme={localTheme == null ? theme : localTheme} setDark={setDark} setLight={setLight}/>
-      <Board theme={localTheme == null ? theme : localTheme}/>
+      <Header theme={localTheme == null ? theme : localTheme} setDark={setDark} setLight={setLight} soundsSwitch={soundsSwitch}/>
+      <Board theme={localTheme == null ? theme : localTheme} play={play} soundEnabled={soundEnabled}/>
       <Footer theme={localTheme == null ? theme : localTheme}/>
     </div>
   );
