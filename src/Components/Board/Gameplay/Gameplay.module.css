@@ -11,3 +11,39 @@
     border-radius: 50%;
     background-color: #fff;
 }
+
+.items {
+    display: flex;
+    min-width: 400px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.result {
+    margin: 0 auto;
+    width: 150px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.gameplay__again {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin: 50px auto;
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: #0f0;
+    transition: all .2s linear;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.gameplay__again:hover {
+    transform: scale(1.1);
+}

@@ -4,5 +4,24 @@
 }
 
 .field__btn {
+    margin-top: 55px;
+    width: 150px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: #0f0;
+    transition: all .2s linear;
+    border: 0;
+    cursor: pointer;
+    outline: none;
+}
+
+.field__btn:hover {
+    transform: scale(1.1);
+}
+
+.field__img {
     margin-top: 50px;
+    width: 250px;
 }

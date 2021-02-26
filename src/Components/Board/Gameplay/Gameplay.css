@@ -1,0 +1,45 @@
+.gameplay {
+    position: relative;
+    margin-top: 100px;
+}
+
+.gameplay .rock {
+    position: relative;
+    transform: none !important;
+}
+
+.gameplay .rock:hover {
+    transform: scale(1.1);
+}
+
+.gameplay .paper {
+    position: relative;
+    transform: none !important;
+}
+
+.gameplay .paper:hover {
+    transform: scale(1.1);
+}
+
+.gameplay .scissors {
+    position: relative;
+    transform: none !important;
+}
+
+.gameplay .scissors:hover {
+    transform: scale(1.1);
+}
+
+.gameplay .spock {
+    position: relative;
+    transform: none !important;
+}
+
+.gameplay .spock:hover {
+    transform: scale(1.1);
+}
+
+.gameplay .autopicked {
+    transform: none !important;
+    position: relative;
+}

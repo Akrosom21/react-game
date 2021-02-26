@@ -156,8 +156,10 @@ export const Board = (props) => {
         <>
             <div className={styles.board}>
                 <Score theme={props.theme} score={localScore}/>
-                <ScoreHistory scoreText={scoreText} score={localScore} step={step} theme={props.theme}/>
-                <a href='/' style={props.theme.tableText} onClick={onScoreReset}>New game</a>
+                <div className={styles.board__scoreHistory}>
+                    <ScoreHistory scoreText={scoreText} score={localScore} step={step} theme={props.theme}/>
+                    <a href='/' style={props.theme.tableText} onClick={onScoreReset} className={styles.board__new}>New game</a>
+                </div>
                 <Route exact path='/' render={() => <GameField itemSelected={itemSelected}/>}/>
                 <Route path="/play" render={() => <Gameplay playerItem={playerItem}
                                                             autoPickedItem={autoPickedItem}
@@ -167,7 +169,7 @@ export const Board = (props) => {
                                                             toGameField={toGameField}
                                                             soundEnabled={props.soundEnabled}/>}/>
             </div>
-                <button onClick={onFastMode}>Switch {speedText} Mode</button>
+                <button onClick={onFastMode} className={styles.board__speed}>Switch {speedText} Mode</button>
         </>
     )
 }

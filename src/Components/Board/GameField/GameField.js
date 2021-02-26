@@ -24,10 +24,10 @@ export const GameField = (props) => {
         props.itemSelected(i, length)
     }
     const item = localGameItems.map(i => <NavLink to='/play' className={i} onClick={() => onItemSelect(i, localGameItems.length)}
-                                            key={i}>{i}</NavLink>)
+                                            key={i}></NavLink>)
     return (
         <div className={styles.field}>
-            <img src={triangle} alt="triangle"/>
+            <img src={triangle} alt="triangle" className={styles.field__img}/>
             {item}
             <button className={styles.field__btn} onClick={onSpockMode}>Switch Spock Mode</button>
         </div>

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {NavLink} from "react-router-dom";
 import styles from './Gameplay.module.css'
+import './Gameplay.css'
 import loading from '../../../img/loading.svg'
 import useSound from 'use-sound';
 import restart from '../../../music/restart.ogg'
@@ -24,14 +25,13 @@ export const Gameplay = (props) => {
         }
     }, [])
     return (
-        <div>
-            <div className="result">{props.scoreText}</div>
+        <div className='gameplay'>
             <div className={styles.items}>
-                <div className={styles.items__player}>{props.playerItem}</div>
-                {props.isLoading && <img src={loading} alt="loading"/>}
-                <div className={styles.items__auto}>{props.autoPickedItem}</div>
+                <div className={props.playerItem}></div>
+                {props.isLoading ? <img src={loading} alt="loading" className={styles.result}/> : <div className={styles.result}>{props.scoreText}</div>}
+                <div className={`${props.autoPickedItem} autopicked`}></div>
             </div>
-            <NavLink to='/' onClick={onReset}>Play again</NavLink>
+            <NavLink to='/' onClick={onReset} className={styles.gameplay__again}>Play again</NavLink>
         </div>
     )
 }

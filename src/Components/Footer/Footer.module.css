@@ -1,9 +1,38 @@
 .footer {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    align-items: center;
+    padding: 10px;
+    border-top: 2px solid #ffffff;
+}
+
+.footer a {
+    text-decoration: none;
+    font-size: 16px;
 }
 
 .footer__logo {
     width: 50px;
+    transition: all .2s linear;
+}
+
+.footer__logo:hover {
+    transform: scale(1.1);
+}
+
+.footer span {
+    margin-left: 100px;
+    margin-right: 100px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.footer__github {
+    width: 30px;
+    height: 30px;
+    transition: all .2s linear;
+}
+
+.footer__github:hover {
+    transform: scale(1.1);
 }

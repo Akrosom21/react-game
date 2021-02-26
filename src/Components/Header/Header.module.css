@@ -2,12 +2,93 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 200px;
+    margin: 20px 200px;
+    padding: 15px 20px;
     position: relative;
+    border: 2px solid #ffffff;
+    border-radius: 10px;
 }
 
 .header__name {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.header__btns {
+    display: flex;
+    align-items: center;
+}
+
+.header__day {
+    height: 40px;
+    width: 40px;
+    background-image: url('../../img/day-night.svg');
+    border-radius: 5px;
+    border: 1px solid #000;
+    cursor: pointer;
+    background-color: #333;
+    transition: all .2s linear;
+    outline: none;
+}
+
+.header__day:hover {
+    transform: scale(1.1);
+}
+
+.header__music {
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+    background-image: url('../../img/music.svg');
+    background-size: cover;
+    border-radius: 5px;
+    border: 1px solid #000;
+    cursor: pointer;
+    background-color: #333;
+    transition: all .2s linear;
+    outline: none;
+}
+
+.header__music:hover {
+    transform: scale(1.1);
+}
+
+.header__rules {
+    margin-left: 20px;
+    width: 40px;
+    height: 40px;
+    background-image: url('../../img/rule.svg');
+    background-size: cover;
+    border-radius: 5px;
+    border: 1px solid #000;
+    cursor: pointer;
+    background-color: #333;
+    transition: all .2s linear;
+    outline: none;
+}
+
+.header__rules:hover {
+    transform: scale(1.1);
+}
+
+.header__full {
+    margin-left: 80px;
+    width: 30px;
+    height: 30px;
+    background-image: url('../../img/fullscreen.svg');
+    background-size: cover;
+    cursor: pointer;
+    transition: all .2s linear;
+    outline: none;
+}
+
+.header__full:hover {
+    transform: scale(1.1);
+}
+
+.header__btnsInner {
+    display: flex;
 }

@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react'
+import styles from './ScoreHistory.module.css'
 
 export const ScoreHistory = (props) => {
     const [history, setHistory] = useState([{step: 1, result: 'Welcome to the game', score: 0}])
@@ -24,10 +25,10 @@ export const ScoreHistory = (props) => {
         }
     },[props.step])
     return (
-        <div style={props.theme.tableText}>
-            <div className="history__title"><span>Step</span><span>Result</span><span>Score</span></div>
-            <div className="history__text">
-                {localHistory.map((h, i) => <div key={i}><span>{h.step}</span><span>{h.result}</span><span>{h.score}</span></div>)}
+        <div style={props.theme.tableText} className={styles.history__table}>
+            <div className={styles.history__title}><span>Step</span><span>Result</span><span>Score</span></div>
+            <div>
+                {localHistory.map((h, i) => <div className={styles.history__text} key={i}><span>{h.step}</span><span>{h.result}</span><span>{h.score}</span></div>)}
             </div>
         </div>
     )

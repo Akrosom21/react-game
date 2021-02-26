@@ -1,0 +1,32 @@
+.history__table {
+    width: 300px;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #555;
+}
+
+.history__title {
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.history__title span:nth-child(2) {
+    display: block;
+    width: 150px;
+    margin: 5px 25px;
+}
+
+.history__text {
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.history__text span:nth-child(2) {
+    display: block;
+    width: 150px;
+    margin: 5px 40px;
+}

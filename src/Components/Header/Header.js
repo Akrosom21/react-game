@@ -41,13 +41,17 @@ export const Header = (props) => {
         <div className={styles.header}>
             <div style={props.theme.headerText} className={styles.header__name}>
                 <span>ROCK</span><span>PAPER</span><span>SCISSORS</span>
-                <button onClick={onSetMode}>{mode}</button>
             </div>
-            <div className="header__music" onClick={onMusic}>Music</div>
-            {isMusic && <Music musicClose={musicClose} soundsSwitch={props.soundsSwitch}/>}
-            <div className="header__rulers" onClick={onRulers}>Rulers</div>
-            {isRulers && <Rules rulersClose={rulersClose} />}
-            <div onClick={onFullscreen}>Fullscreen</div>
+            <div className={styles.header__btns}>
+                <div className={styles.header__btnsInner}>
+                    <button onClick={onSetMode} className={styles.header__day}></button>
+                    <div className={styles.header__music} onClick={onMusic}></div>
+                    {isMusic && <Music musicClose={musicClose} soundsSwitch={props.soundsSwitch}/>}
+                    <div className={styles.header__rules} onClick={onRulers}></div>
+                    {isRulers && <Rules rulersClose={rulersClose}/>}
+                </div>
+                <div onClick={onFullscreen} className={styles.header__full}></div>
+            </div>
         </div>
     )
 }

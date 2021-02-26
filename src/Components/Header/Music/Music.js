@@ -22,14 +22,16 @@ export const Music = (props) => {
     }
     return (
         <div className={styles.music}>
-            <span onClick={onMusicClose}>close</span>
-            <button onClick={onPlayToggle}>Play/stop music</button>
-            <div className="music__volume">
-                <button onClick={()=> onVolumeChange(0.2)}>softly</button>
-                <button onClick={()=> onVolumeChange(0.5)}>average</button>
-                <button onClick={()=> onVolumeChange(1)}>loudly</button>
+            <span onClick={onMusicClose} className={styles.music__close}></span>
+            <div className={styles.music__inner}>
+                <button onClick={onPlayToggle} className={styles.music__play}></button>
+                <div className="music__volume">
+                    <button onClick={()=> onVolumeChange(0.2)} className={styles.music__btn}>softly</button>
+                    <button onClick={()=> onVolumeChange(0.5)} className={styles.music__btn}>average</button>
+                    <button onClick={()=> onVolumeChange(1)} className={styles.music__btn}>loudly</button>
+                </div>
             </div>
-            <button onClick={onSoundsSwitch}>On/off sounds</button>
+            <button onClick={onSoundsSwitch} className={styles.music__sound}>On/off sounds</button>
         </div>
     )
 }
