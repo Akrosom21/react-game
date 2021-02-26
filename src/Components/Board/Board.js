@@ -18,6 +18,7 @@ export const Board = (props) => {
     const [step, setStep] = useState(0)
     const [speed, setSpeed] = useState(0)
     const [play] = useSound(end, {soundEnabled: props.soundEnabled})
+    const [isAuto, setIsAuto] = useState(true)
     if (!localStorage.getItem('speed')) {
         localStorage.setItem('speed', String(3000))
         setSpeed(3000)
@@ -107,6 +108,35 @@ export const Board = (props) => {
             play()
         }, +localSpeed)
     }
+    const autoplay = () => {
+        setTimeout(() => {
+            let random = Math.floor(Math.random() * 3) + 1
+            let autoItem = random === 1 ? 'rock' :
+                random === 2 ? 'paper' :
+                    random === 3 ? 'scissors' :
+                        random === 4 ? 'spock' : ''
+            path.push('/play')
+            itemSelected(autoItem)
+        }, 1000)
+        setTimeout(() => {
+            path.push('/')
+            setAutoPickedItem(null)
+            setScoreText('')
+            setIsLoading(true)
+        }, 4000)
+    }
+    const onAuto = () => {
+        if (isAuto) {
+            autoplay()
+            setInterval(autoplay, 5000)
+            setIsAuto(false)
+        }
+        else {
+            path.push('/')
+            window.location.reload()
+        }
+
+    }
     const onItemPressed = (e) => {
         if (e.key === 'ArrowLeft') {
             path.push('/play')
@@ -143,7 +173,7 @@ export const Board = (props) => {
         path.push('/')
     }
     const onFastMode = () => {
-        if(localSpeed == 3000) {
+        if (localSpeed == 3000) {
             setSpeed(1000)
             localStorage.setItem('speed', String(1000))
 
@@ -158,7 +188,8 @@ export const Board = (props) => {
                 <Score theme={props.theme} score={localScore}/>
                 <div className={styles.board__scoreHistory}>
                     <ScoreHistory scoreText={scoreText} score={localScore} step={step} theme={props.theme}/>
-                    <a href='/' style={props.theme.tableText} onClick={onScoreReset} className={styles.board__new}>New game</a>
+                    <a href='/' style={props.theme.tableText} onClick={onScoreReset} className={styles.board__new}>New
+                        game</a>
                 </div>
                 <Route exact path='/' render={() => <GameField itemSelected={itemSelected}/>}/>
                 <Route path="/play" render={() => <Gameplay playerItem={playerItem}
@@ -169,7 +200,8 @@ export const Board = (props) => {
                                                             toGameField={toGameField}
                                                             soundEnabled={props.soundEnabled}/>}/>
             </div>
-                <button onClick={onFastMode} className={styles.board__speed}>Switch {speedText} Mode</button>
+            <button onClick={onFastMode} className={styles.board__speed}>Switch {speedText} Mode</button>
+            <button onClick={onAuto} className={styles.board__auto}>Autoplay on/off</button>
         </>
     )
 }
