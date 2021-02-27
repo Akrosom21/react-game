@@ -21,17 +21,17 @@ export const Music = (props) => {
         props.soundsSwitch()
     }
     return (
-        <div className={styles.music}>
+        <div style={props.theme.tableText} className={styles.music}>
             <span onClick={onMusicClose} className={styles.music__close}></span>
             <div className={styles.music__inner}>
                 <button onClick={onPlayToggle} className={styles.music__play}></button>
                 <div className="music__volume">
-                    <button onClick={()=> onVolumeChange(0.2)} className={styles.music__btn}>softly</button>
-                    <button onClick={()=> onVolumeChange(0.5)} className={styles.music__btn}>average</button>
-                    <button onClick={()=> onVolumeChange(1)} className={styles.music__btn}>loudly</button>
+                    <button style={props.theme.buttonsColors} onClick={()=> onVolumeChange(0.2)} className={styles.music__btn}>softly</button>
+                    <button style={props.theme.buttonsColors} onClick={()=> onVolumeChange(0.5)} className={styles.music__btn}>average</button>
+                    <button style={props.theme.buttonsColors} onClick={()=> onVolumeChange(1)} className={styles.music__btn}>loudly</button>
                 </div>
             </div>
-            <button onClick={onSoundsSwitch} className={styles.music__sound}>On/off sounds</button>
+            <button style={props.theme.buttonsColors} onClick={onSoundsSwitch} className={styles.music__sound}>On/off sounds</button>
         </div>
     )
 }

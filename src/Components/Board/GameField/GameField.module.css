@@ -25,3 +25,12 @@
     margin-top: 50px;
     width: 250px;
 }
+
+@media (max-width: 860px) {
+    .field__btn {
+        right: 20px;
+        bottom: 170px;
+        font-size: 12px;
+        width: 100px;
+    }
+}

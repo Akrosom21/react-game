@@ -7,7 +7,7 @@ import useSound from "use-sound";
 import soundSelect from "./music/start.mp3";
 
 function App() {
-    const [soundEnabled, setSoundEnabled] = useState(true)
+    const [soundEnabled, setSoundEnabled] = useState(false)
     const [play] = useSound(soundSelect, {soundEnabled})
     const lightTheme = {
         background: {background: 'radial-gradient(circle, #08d9d6 0%, #08d9d6 100%)'},
@@ -31,7 +31,7 @@ function App() {
         buttonsColors: {backgroundColor: '#00adb5', color: '#eeeeee'},
         footer: {color: '#eeeeee', borderColor: '#00adb5'}
     }
-    const [theme, setTheme] = useState({...lightTheme})
+    const [theme, setTheme] = useState({...darkTheme})
     let localTheme = JSON.parse(localStorage.getItem('theme'))
     if (!lightTheme) {
         localStorage.setItem('theme', JSON.stringify(lightTheme))

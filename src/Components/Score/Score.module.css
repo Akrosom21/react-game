@@ -12,3 +12,11 @@
     right: 100px;
     font-weight: bold;
 }
+
+@media (max-width: 860px) {
+    .score {
+        top: 250px;
+        right: 0;
+        left: 20px;
+    }
+}

@@ -92,3 +92,9 @@
 .header__btnsInner {
     display: flex;
 }
+
+@media(max-width: 860px) {
+    .header {
+        margin: 20px;
+    }
+}

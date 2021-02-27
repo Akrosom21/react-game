@@ -7,6 +7,8 @@ import {Score} from "../Score/Score";
 import {ScoreHistory} from "./ScoreHistory/ScoreHistory";
 import end from '../../music/end.mp3'
 import useSound from "use-sound";
+import table from '../../img/table.svg'
+import close from '../../img/close.svg'
 
 export const Board = (props) => {
     const [playerItem, setPlayerItem] = useState('')
@@ -19,6 +21,7 @@ export const Board = (props) => {
     const [speed, setSpeed] = useState(0)
     const [play] = useSound(end, {soundEnabled: props.soundEnabled})
     const [isAuto, setIsAuto] = useState(true)
+    const [historyToggle, setHistoryToggle] = useState({})
     if (!localStorage.getItem('speed')) {
         localStorage.setItem('speed', String(3000))
         setSpeed(3000)
@@ -90,6 +93,7 @@ export const Board = (props) => {
         }
     }, [])
     const itemSelected = (i, length) => {
+        setHistoryToggle({display: 'none'})
         let random = Math.floor(Math.random() * 3) + 1
         if (length === 4) {
             random = Math.floor(Math.random() * 4) + 1
@@ -131,8 +135,7 @@ export const Board = (props) => {
             autoplay()
             setInterval(autoplay, 5000)
             setIsAuto(false)
-        }
-        else {
+        } else {
             path.push('/')
             window.location.reload()
         }
@@ -173,6 +176,17 @@ export const Board = (props) => {
     const toGameField = () => {
         path.push('/')
     }
+    const onHistoryToggle = () => {
+        if (historyToggle.display == 'none') {
+            setHistoryToggle({display: 'block'})
+        }
+        else if (historyToggle.display === undefined) {
+            setHistoryToggle({display: 'block'})
+        }
+        else {
+            setHistoryToggle({display: 'none'})
+        }
+    }
     const onFastMode = () => {
         if (localSpeed == 3000) {
             setSpeed(1000)
@@ -187,9 +201,16 @@ export const Board = (props) => {
         <>
             <div className={styles.board}>
                 <Score theme={props.theme} score={localScore}/>
-                <div className={styles.board__scoreHistory}>
+                {(historyToggle.display == 'none' || historyToggle.display == undefined)
+                ?
+                    <img className={styles.tableIcon} onClick={onHistoryToggle} src={table} alt="table"/>
+                    :
+                    <img className={styles.tableIcon} onClick={onHistoryToggle} src={close} alt="table"/>
+                }
+                <div style={historyToggle} className={styles.board__scoreHistory}>
                     <ScoreHistory scoreText={scoreText} score={localScore} step={step} theme={props.theme}/>
-                    <a href='/' style={props.theme.buttonsColors} onClick={onScoreReset} className={styles.board__new}>New
+                    <a href='/' style={props.theme.buttonsColors} onClick={onScoreReset}
+                       className={styles.board__new}>New
                         game</a>
                 </div>
                 <Route exact path='/' render={() => <GameField itemSelected={itemSelected} theme={props.theme}/>}/>
@@ -202,8 +223,11 @@ export const Board = (props) => {
                                                             soundEnabled={props.soundEnabled}
                                                             theme={props.theme}/>}/>
             </div>
-            <button style={props.theme.buttonsColors} onClick={onFastMode} className={styles.board__speed}>Switch {speedText} Mode</button>
-            <button style={props.theme.buttonsColors} onClick={onAuto} className={styles.board__auto}>Autoplay on/off</button>
+            <button style={props.theme.buttonsColors} onClick={onFastMode}
+                    className={styles.board__speed}>Switch {speedText} Mode
+            </button>
+            <button style={props.theme.buttonsColors} onClick={onAuto} className={styles.board__auto}>Autoplay on/off
+            </button>
         </>
     )
 }
