@@ -10,22 +10,26 @@ function App() {
     const [soundEnabled, setSoundEnabled] = useState(true)
     const [play] = useSound(soundSelect, {soundEnabled})
     const lightTheme = {
-        background: {background: 'radial-gradient(circle, #717f91 0%, #515282 100%)'},
-        headerText: {color: '#000'},
-        tableText: {color: '#000'},
+        background: {background: 'radial-gradient(circle, #08d9d6 0%, #08d9d6 100%)'},
+        headerText: {color: '#eaeaea'},
+        headerBorder: {borderColor: '#ff2e63'},
+        tableText: {color: '#eaeaea', backgroundColor: '#aa96da'},
         score: {
-            scoreBox: {background: '#999', color: '#000'}
+            scoreBox: {background: '#aa96da', color: '#eaeaea'}
         },
-        footer: {color: '#000'}
+        buttonsColors: {backgroundColor: '#ff2e63', color: '#eaeaea'},
+        footer: {color: '#eaeaea', borderColor: '#ff2e63'}
     }
     const darkTheme = {
-        background: {background: 'radial-gradient(circle, #717f91 0%, #515282 100%)'},
-        headerText: {color: '#fff'},
-        tableText: {color: '#fff'},
+        background: {background: 'radial-gradient(circle, #393e46 0%, #222831 100%)'},
+        headerText: {color: '#eeeeee'},
+        headerBorder: {borderColor: '#00adb5'},
+        tableText: {color: '#eeeeee', backgroundColor: '#393e46'},
         score: {
-            scoreBox: {background: '#222', color: '#fff'}
+            scoreBox: {background: '#393e46', color: '#eeeeee'}
         },
-        footer: {color: '#fff'}
+        buttonsColors: {backgroundColor: '#00adb5', color: '#eeeeee'},
+        footer: {color: '#eeeeee', borderColor: '#00adb5'}
     }
     const [theme, setTheme] = useState({...lightTheme})
     let localTheme = JSON.parse(localStorage.getItem('theme'))
@@ -44,7 +48,7 @@ function App() {
         soundEnabled ? setSoundEnabled(false) : setSoundEnabled(true)
     }
   return (
-    <div className="App" style={lightTheme.background}>
+    <div className="App" style={localTheme.background}>
       <Header theme={localTheme == null ? theme : localTheme} setDark={setDark} setLight={setLight} soundsSwitch={soundsSwitch}/>
       <Board theme={localTheme == null ? theme : localTheme} play={play} soundEnabled={soundEnabled}/>
       <Footer theme={localTheme == null ? theme : localTheme}/>

@@ -28,10 +28,15 @@ export const Gameplay = (props) => {
         <div className='gameplay'>
             <div className={styles.items}>
                 <div className={props.playerItem}></div>
-                {props.isLoading ? <img src={loading} alt="loading" className={styles.result}/> : <div className={styles.result}>{props.scoreText}</div>}
+                {props.isLoading
+                    ?
+                    <img src={loading} alt="loading" className={styles.result}/>
+                    :
+                    <div style={props.theme.headerText} className={styles.result}>{props.scoreText}</div>}
                 <div className={`${props.autoPickedItem} autopicked`}></div>
             </div>
-            <NavLink to='/' onClick={onReset} className={styles.gameplay__again}>Play again</NavLink>
+            <NavLink to='/' onClick={onReset} style={props.theme.buttonsColors} className={styles.gameplay__again}>Play
+                again</NavLink>
         </div>
     )
 }

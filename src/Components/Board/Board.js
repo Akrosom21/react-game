@@ -81,6 +81,7 @@ export const Board = (props) => {
         checkResult()
     }, [autoPickedItem, playerItem])
     useEffect(() => {
+        path.push('/')
         document.addEventListener('keydown', onScoreRestart)
         document.addEventListener('keydown', onItemPressed)
         return () => {
@@ -188,20 +189,21 @@ export const Board = (props) => {
                 <Score theme={props.theme} score={localScore}/>
                 <div className={styles.board__scoreHistory}>
                     <ScoreHistory scoreText={scoreText} score={localScore} step={step} theme={props.theme}/>
-                    <a href='/' style={props.theme.tableText} onClick={onScoreReset} className={styles.board__new}>New
+                    <a href='/' style={props.theme.buttonsColors} onClick={onScoreReset} className={styles.board__new}>New
                         game</a>
                 </div>
-                <Route exact path='/' render={() => <GameField itemSelected={itemSelected}/>}/>
+                <Route exact path='/' render={() => <GameField itemSelected={itemSelected} theme={props.theme}/>}/>
                 <Route path="/play" render={() => <Gameplay playerItem={playerItem}
                                                             autoPickedItem={autoPickedItem}
                                                             resetLap={resetLap}
                                                             isLoading={isLoading}
                                                             scoreText={scoreText}
                                                             toGameField={toGameField}
-                                                            soundEnabled={props.soundEnabled}/>}/>
+                                                            soundEnabled={props.soundEnabled}
+                                                            theme={props.theme}/>}/>
             </div>
-            <button onClick={onFastMode} className={styles.board__speed}>Switch {speedText} Mode</button>
-            <button onClick={onAuto} className={styles.board__auto}>Autoplay on/off</button>
+            <button style={props.theme.buttonsColors} onClick={onFastMode} className={styles.board__speed}>Switch {speedText} Mode</button>
+            <button style={props.theme.buttonsColors} onClick={onAuto} className={styles.board__auto}>Autoplay on/off</button>
         </>
     )
 }
