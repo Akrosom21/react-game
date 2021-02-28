@@ -1,9 +1,13 @@
 # react-game
 
-This is simple game named "Rock, paper, scissors"
+This is simple game named "Rock, paper, scissors".
+
 You can find rules in the modal window. Just click on yellow card in the header.
-There also you can see hot keys
-The table contains the last 10 results of the gameE
+
+There also you can see hot keys.
+
+The table contains the last 10 results of the game.
+
 To reset results click on the "New game"
 
 ### Music and sounds
