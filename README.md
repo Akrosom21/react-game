@@ -17,11 +17,12 @@ You can adjust music and sounds in the modal window. Just click on musical icon 
 ### Light/Dark mode
 
 It is possible to change colors of game by clicking on the appropriate icon
+
 Also in the header you can find icon for turning on fullscreen mode
 
 ### Spock mode
 
-Click on the "Switch Spock Mode" to add Spock to the boadr
+Click on the "Switch Spock Mode" to add Spock to the board
 
 ### Autoplay
 
