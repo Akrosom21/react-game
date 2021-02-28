@@ -22,6 +22,7 @@ export const Board = (props) => {
     const [play] = useSound(end, {soundEnabled: props.soundEnabled})
     const [isAuto, setIsAuto] = useState(true)
     const [historyToggle, setHistoryToggle] = useState({})
+    console.log(historyToggle);
     if (!localStorage.getItem('speed')) {
         localStorage.setItem('speed', String(3000))
         setSpeed(3000)
@@ -93,7 +94,6 @@ export const Board = (props) => {
         }
     }, [])
     const itemSelected = (i, length) => {
-        setHistoryToggle({display: 'none'})
         let random = Math.floor(Math.random() * 3) + 1
         if (length === 4) {
             random = Math.floor(Math.random() * 4) + 1
