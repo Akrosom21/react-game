@@ -21,7 +21,7 @@ export const Header = (props) => {
     const [modeText, setModeText] = useState('')
     let mode = localStorage.getItem('mode')
     if (!mode) {
-        localStorage.setItem('mode', 'Light theme')
+        localStorage.setItem('mode', 'Dark theme')
     }
     const onSetMode = () => {
         if (mode === 'Light theme') {

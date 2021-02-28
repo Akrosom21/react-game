@@ -34,7 +34,7 @@ function App() {
     const [theme, setTheme] = useState({...darkTheme})
     let localTheme = JSON.parse(localStorage.getItem('theme'))
     if (!lightTheme) {
-        localStorage.setItem('theme', JSON.stringify(lightTheme))
+        localStorage.setItem('theme', JSON.stringify(darkTheme))
     }
     const setDark = () => {
         setTheme(darkTheme)
@@ -47,13 +47,14 @@ function App() {
     const soundsSwitch = () => {
         soundEnabled ? setSoundEnabled(false) : setSoundEnabled(true)
     }
-  return (
-    <div className="App" style={localTheme.background}>
-      <Header theme={localTheme == null ? theme : localTheme} setDark={setDark} setLight={setLight} soundsSwitch={soundsSwitch}/>
-      <Board theme={localTheme == null ? theme : localTheme} play={play} soundEnabled={soundEnabled}/>
-      <Footer theme={localTheme == null ? theme : localTheme}/>
-    </div>
-  );
+    return (
+        <div className="App" style={localTheme == null ? theme.background : localTheme.background}>
+            <Header theme={localTheme == null ? theme : localTheme} setDark={setDark} setLight={setLight}
+                    soundsSwitch={soundsSwitch}/>
+            <Board theme={localTheme == null ? theme : localTheme} play={play} soundEnabled={soundEnabled}/>
+            <Footer theme={localTheme == null ? theme : localTheme}/>
+        </div>
+    );
 }
 
 export default App;

@@ -152,8 +152,10 @@ export const Board = (props) => {
             path.push('/play')
             itemSelected('scissors')
         } else if (e.key === 'ArrowUp') {
-            path.push('/play')
-            itemSelected('spock')
+            if (JSON.parse(localStorage.getItem('gameItems')).length === 4) {
+                path.push('/play')
+                itemSelected('spock')
+            }
         }
     }
     const resetLap = () => {
@@ -179,11 +181,9 @@ export const Board = (props) => {
     const onHistoryToggle = () => {
         if (historyToggle.display == 'none') {
             setHistoryToggle({display: 'block'})
-        }
-        else if (historyToggle.display === undefined) {
+        } else if (historyToggle.display === undefined) {
             setHistoryToggle({display: 'block'})
-        }
-        else {
+        } else {
             setHistoryToggle({display: 'none'})
         }
     }
@@ -202,7 +202,7 @@ export const Board = (props) => {
             <div className={styles.board}>
                 <Score theme={props.theme} score={localScore}/>
                 {(historyToggle.display == 'none' || historyToggle.display == undefined)
-                ?
+                    ?
                     <img className={styles.tableIcon} onClick={onHistoryToggle} src={table} alt="table"/>
                     :
                     <img className={styles.tableIcon} onClick={onHistoryToggle} src={close} alt="table"/>
