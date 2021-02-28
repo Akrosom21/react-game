@@ -128,12 +128,12 @@ export const Board = (props) => {
             setAutoPickedItem(null)
             setScoreText('')
             setIsLoading(true)
-        }, 4000)
+        }, 5000)
     }
     const onAuto = () => {
         if (isAuto) {
             autoplay()
-            setInterval(autoplay, 5000)
+            setInterval(autoplay, 6000)
             setIsAuto(false)
         } else {
             path.push('/')
